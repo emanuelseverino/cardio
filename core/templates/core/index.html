@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 {% block content  %}
-<div class="container">
-    <ul class="nav nav-pills justify-content-end mt-2 mb-2">
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'clinica_novo' %}">Cadastrar Clínica</a>
-    </ul>
+<div class="container pt-3">
     <div class="row">
         {% for clinica in clinicas %}
         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-sm-0">

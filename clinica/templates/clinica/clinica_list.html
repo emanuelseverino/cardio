@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container pt-5">
+
+    <p class="h1">Clinicas</p>
+
+    <ul class="nav nav-pills justify-content-end mt-2 mb-2">
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'clinica_novo' %}">Cadastrar Clínica</a>
+    </ul>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Usuário</th>
+            <th scope="col">Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for clinica in clinicas %}
+        <tr>
+            <td scope="row">{{ forloop.counter0|add:1 }}</td>
+            <td class="">{{ clinica.nome }}</td>
+            <td class="">{{ clinica.usuario }}</td>
+            <td>
+                <a href="{% url 'clinica_delete' clinica.id %}" class="btn btn-sm btn-outline-danger" type="button">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

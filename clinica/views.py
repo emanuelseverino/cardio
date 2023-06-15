@@ -6,18 +6,28 @@ import pytz as pytz
 from clinica.forms import PacienteForm
 from clinica.models import Clinica
 from django.utils import timezone
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DeleteView, ListView
 from paciente.models import Paciente
 
 
 class ClinicaNovaView(CreateView):
     model = Clinica
     fields = ['nome', ]
-    success_url = '/'
+    success_url = '/clinica'
 
     def form_valid(self, form):
         form.instance.usuario = self.request.user
         return super().form_valid(form)
+
+
+class ClinicaListView(ListView):
+    model = Clinica
+    context_object_name = 'clinicas'
+
+
+class ClinicaDeleteView(DeleteView):
+    model = Clinica
+    success_url = '/'
 
 
 class PacienteNovoView(CreateView):
