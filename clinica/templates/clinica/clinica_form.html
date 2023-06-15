@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container pt-5">
+    <p class="h1">Crie uma nova clinica</p>
+    <form method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="">
+            <label for="{{ field.label|lower }}" class="form-label">Nome</label>
+            <input type="text" class="form-control" required id="{{ field.label|lower }}"
+                   name="{{ field.label|lower }}" placeholder="ex: Clinica Central">
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-block mt-2">Cadastrar</button>
+    </form>
+</div>
+{% endblock %}

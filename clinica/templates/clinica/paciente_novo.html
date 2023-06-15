@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container pt-5">
+
+    <p class="h1">{{ clinica }}</p>
+    <p class="p">Hoje <strong>{{ hoje|date:"d/m/Y" }}</strong> foram cadastrados <strong>{{ pacientes|length }}</strong> pacientes.</p>
+    <p class="p">Esse mês de <strong>{{ hoje|date:"F" }}</strong> foram cadastrados <strong>{{ pacientes_mes|length }}</strong> pacientes.</p>
+
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="">
+            <label for="{{ field.label|lower }}" class="form-label">Nome</label>
+            <input type="text" class="form-control" required id="{{ field.label|lower }}" name="{{ field.label|lower }}" placeholder="Ex: Maria José da Silva">
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-block mt-2">Cadastrar</button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Data</th>
+            <th scope="col">Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for paciente in pacientes_mes %}
+        <tr>
+            <td scope="row">{{ forloop.counter0|add:1 }}</td>
+            <td class="">{{ paciente.nome }}</td>
+            <td class="">{{ paciente.criado_em|date }}</td>
+            <td>
+                <a href="{% url 'paciente_delete' paciente.id %}" class="btn btn-sm btn-outline-danger" type="button">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
