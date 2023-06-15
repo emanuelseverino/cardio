@@ -105,4 +105,4 @@ CORS_ALLOW_METHODS = [
     "PUT",
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://*', 'http://*', 'https://web-production-7c1f.up.railway.app', ]
+CSRF_TRUSTED_ORIGINS = ['https://*', 'http://*', 'https://web-production-858c.up.railway.app', ]
