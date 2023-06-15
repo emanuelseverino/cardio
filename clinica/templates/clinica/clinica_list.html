@@ -9,28 +9,28 @@
             <a class="nav-link active" href="{% url 'clinica_novo' %}">Cadastrar Clínica</a>
     </ul>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Nº</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Usuário</th>
-            <th scope="col">Ação</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for clinica in clinicas %}
-        <tr>
-            <td scope="row">{{ forloop.counter0|add:1 }}</td>
-            <td class="">{{ clinica.nome }}</td>
-            <td class="">{{ clinica.usuario }}</td>
-            <td>
-                <a href="{% url 'clinica_delete' clinica.id %}" class="btn btn-sm btn-outline-danger" type="button">Excluir</a>
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th class="" scope="">Nome</th>
+                <th class="" scope="">Criado</th>
+                <th class="" scope="">Relatório</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for clinica in clinicas %}
+            <tr>
+                <td class=""><a href="{% url 'clinica_detail' clinica.id %}">{{ clinica.nome }}</a></td>
+                <td class="">{{ clinica.usuario }}</td>
+                <td>
+                    <a href="{% url 'relatorio_pdf' clinica.id %}" class="btn btn-sm btn-outline-success" type="button">Relatório</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 </div>
 {% endblock %}

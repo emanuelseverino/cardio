@@ -6,8 +6,13 @@ import pytz as pytz
 from clinica.forms import PacienteForm
 from clinica.models import Clinica
 from django.utils import timezone
-from django.views.generic import CreateView, DeleteView, ListView
+from django.views.generic import CreateView, DeleteView, ListView, DetailView
 from paciente.models import Paciente
+
+
+class ClinicaDetailView(DetailView):
+    model = Clinica
+    context_object_name = 'clinica'
 
 
 class ClinicaNovaView(CreateView):
