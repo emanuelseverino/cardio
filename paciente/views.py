@@ -49,9 +49,12 @@ class PDF(View):
         hoje = timezone.now().date()
         ano = timezone.now().year
         mes = timezone.now().month
+        mes_nome = calendar.month_name[timezone.now().month]
         primeiro_dia = datetime(ano, mes, 1, tzinfo=pytz.timezone('America/Sao_Paulo'))
         ultimo_dia = datetime(ano, mes, calendar.monthrange(ano, mes)[1], tzinfo=pytz.timezone('America/Sao_Paulo'))
-        pacientes = Paciente.objects.filter(clinica=clinica, criado_em__range=(primeiro_dia, ultimo_dia)).order_by('criado_em')
+        pacientes = Paciente.objects.filter(clinica=clinica, criado_em__range=(primeiro_dia, ultimo_dia)).order_by(
+            'criado_em')
+        nome_arquivo = '%s%s' % (clinica.nome.replace(' ', ''), mes_nome)
         params = {
             'clinica': clinica,
             'hoje': hoje,
@@ -59,7 +62,7 @@ class PDF(View):
             'pacientes': pacientes,
             'request': request,
         }
-        return Render.render('paciente/relatorio.html', params, 'myfile')
+        return Render.render('paciente/relatorio.html', params, nome_arquivo)
 
 
 class CSV(View):
