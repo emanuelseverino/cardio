@@ -8,7 +8,7 @@ from django.utils import timezone
 import xlwt
 from django.http import HttpResponse
 from django.views import View
-from django.views.generic import DeleteView
+from django.views.generic import DeleteView, FormView
 
 from clinica.models import Clinica
 from paciente.models import Paciente
@@ -44,7 +44,10 @@ class Render:
 
 
 class PDF(View):
+
     def get(self, request, id):
+        print(self.args)
+        print(self.kwargs)
         clinica = Clinica.objects.get(id=id)
         hoje = timezone.now().date()
         ano = timezone.now().year
@@ -63,6 +66,12 @@ class PDF(View):
             'request': request,
         }
         return Render.render('paciente/relatorio.html', params, nome_arquivo)
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+        pass
 
 
 class CSV(View):

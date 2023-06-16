@@ -2,22 +2,27 @@
 {% block content %}
 <div class="container pt-5">
 
-    <p class="h1">{{ clinica }}</p>
-    <p class="p">Hoje <strong>{{ hoje|date:"d/m/Y" }}</strong> foram cadastrados <strong>{{ pacientes|length }}</strong> pacientes.</p>
-    <p class="p">Esse mês de <strong>{{ hoje|date:"F" }}</strong> foram cadastrados <strong>{{ pacientes_mes|length }}</strong> pacientes.</p>
 
-
-    <form method="post">
-        {% csrf_token %}
-
-        {% for field in form %}
-        <div class="">
-            <label for="{{ field.label|lower }}" class="form-label">Nome</label>
-            <input type="text" class="form-control" required id="{{ field.label|lower }}" name="{{ field.label|lower }}" placeholder="Ex: Maria José da Silva">
-        </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary btn-block mt-2">Cadastrar</button>
-    </form>
+    <p class="display-6">{{ clinica }}</p>
+    <p>Até hoje em {{ hoje|date:"F" }} foram cadastrados {{ pacientes_mes|length }} pacientes.</p>
+    <a class="btn btn-success" href="{% url 'relatorio_clinica' clinica.id %}">Relatórios</a>
+    <div class="card p-5 mt-3 mb-3">
+        <p class="h3">Cadastre aqui um novo paciente para esta a clinica!</p>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="">
+                <label for="{{ field.label|lower }}" class="form-label">Nome</label>
+                <input type="text" class="form-control" required id="{{ field.label|lower }}"
+                       name="{{ field.label|lower }}"
+                       placeholder="Ex: Maria José da Silva">
+            </div>
+            {% endfor %}
+            <div class="d-grid align-center mx-auto col-xs-12 col-sm-12">
+                <button type="submit" class="btn btn-primary btn-block mt-2">Cadastrar</button>
+            </div>
+        </form>
+    </div>
 
     <table class="table table-striped">
         <thead>
@@ -25,7 +30,7 @@
             <th scope="col">Nº</th>
             <th scope="col">Nome</th>
             <th scope="col">Data</th>
-            <th scope="col">Ação</th>
+            <th scope="col">Excluir</th>
         </tr>
         </thead>
         <tbody>
@@ -35,7 +40,7 @@
             <td class="">{{ paciente.nome }}</td>
             <td class="">{{ paciente.criado_em|date }}</td>
             <td>
-                <a href="{% url 'paciente_delete' paciente.id %}" class="btn btn-sm btn-outline-danger" type="button">Excluir</a>
+                <a href="{% url 'paciente_delete' paciente.id %}" class="btn btn-sm btn-outline-danger" type="button">x</a>
             </td>
         </tr>
         {% endfor %}

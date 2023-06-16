@@ -1,4 +1,5 @@
-from clinica.views import PacienteNovoView, ClinicaNovaView, ClinicaDeleteView, ClinicaListView, ClinicaDetailView
+from clinica.views import PacienteNovoView, ClinicaNovaView, ClinicaDeleteView, ClinicaListView, ClinicaDetailView, \
+    MesView, RelatorioView
 from django.urls import path
 
 from core.views import IndexView
@@ -9,4 +10,6 @@ urlpatterns = [
     path('nova', ClinicaNovaView.as_view(), name='clinica_novo'),
     path('<int:clinica_id>/paciente/novo', PacienteNovoView.as_view(), name='paciente_novo'),
     path('<int:pk>/apagar', ClinicaDeleteView.as_view(), name='clinica_delete'),
+    path('mes', MesView.as_view(), name='meses'),
+    path('<int:id>/relatorio', RelatorioView.as_view(), name='relatorio_clinica'),
 ]

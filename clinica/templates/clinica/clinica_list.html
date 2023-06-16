@@ -14,15 +14,13 @@
             <thead>
             <tr>
                 <th class="" scope="">Nome</th>
-                <th class="" scope="">Criado</th>
                 <th class="" scope="">Relatório</th>
             </tr>
             </thead>
             <tbody>
             {% for clinica in clinicas %}
             <tr>
-                <td class=""><a href="{% url 'clinica_detail' clinica.id %}">{{ clinica.nome }}</a></td>
-                <td class="">{{ clinica.usuario }}</td>
+                <td class=""><a class="nav-link active" href="{% url 'clinica_detail' clinica.id %}">{{ clinica.nome }}</a></td>
                 <td>
                     <a href="{% url 'relatorio_pdf' clinica.id %}" class="btn btn-sm btn-outline-success" type="button">Relatório</a>
                 </td>
