@@ -1,14 +1,12 @@
-import csv
 import datetime
 import io
 import calendar
 from datetime import datetime
 import pytz as pytz
 from django.utils import timezone
-import xlwt
 from django.http import HttpResponse
 from django.views import View
-from django.views.generic import DeleteView, FormView
+from django.views.generic import DeleteView
 
 from clinica.models import Clinica
 from paciente.models import Paciente
@@ -46,8 +44,8 @@ class Render:
 class PDF(View):
 
     def get(self, request, id):
-        print(self.args)
-        print(self.kwargs)
+        print('args: %s' % self.args)
+        print('args: %s' % self.kwargs)
         clinica = Clinica.objects.get(id=id)
         hoje = timezone.now().date()
         ano = timezone.now().year
@@ -59,6 +57,7 @@ class PDF(View):
             'criado_em')
         nome_arquivo = '%s%s' % (clinica.nome.replace(' ', ''), mes_nome)
         params = {
+            'imagem': 'staticfiles/img/logo-h.png',
             'clinica': clinica,
             'hoje': hoje,
             'mes': mes,
@@ -74,49 +73,4 @@ class PDF(View):
         pass
 
 
-class CSV(View):
-    def get(self, request):
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="relatorios.csv"'
 
-        pacientes = Paciente.objects.all()
-
-        writer = csv.writer(response)
-        writer.writerow(['id', 'Nome', 'Data', ])
-        for paciente in pacientes:
-            writer.writerow([paciente.pk, paciente.nome, paciente.criado_em, ])
-
-        return response
-
-
-class EXCEL(View):
-    def get(self, request):
-        response = HttpResponse(content_type='application/ms-excel')
-        response['Content-Disposition'] = 'attachment; filename="pacientes.xls"'
-
-        wb = xlwt.Workbook(encoding='utf-8')
-        ws = wb.add_sheet('Pacientes')
-
-        row_num = 0
-
-        font_style = xlwt.XFStyle()
-        font_style.font.bold = True
-
-        columns = ['Id', 'Nome', 'Data', ]
-
-        for col_num in range(len(columns)):
-            ws.write(row_num, col_num, columns[col_num], font_style)
-
-        font_style = xlwt.XFStyle()
-
-        pacientes = Paciente.objects.all()
-
-        row_num = 1
-        for paciente in pacientes:
-            data = '%s' % format(paciente.criado_em, "%d/%m/%Y")
-            ws.write(row_num, 0, paciente.pk, font_style)
-            ws.write(row_num, 1, paciente.nome, font_style)
-            ws.write(row_num, 2, data, font_style)
-            row_num += 1
-        wb.save(response)
-        return response

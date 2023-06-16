@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+    <link rel="icon" type="image/png" href="{% static 'img/icone.png' %}">
 
     <title>Signin Template for Bootstrap</title>
 
@@ -22,9 +22,7 @@
 <body class="text-center">
 <form class="form-signin" method="post" action="{% url 'login' %}">
     {% csrf_token %}
-    <img class="" src="{% static 'img/logo.jpg' %}" alt="" width="120">
-    <p class="h4 font-weight-normal">Seja bem-vindo</p>
-    <p class="p  font-weight-normal">Por favor, se identifique</p>
+    <img class="" src="{% static 'img/logo-q.png' %}" alt="" width="200">
     <label for="inputEmail" class="sr-only"></label>
     <input type="text" id="inputEmail" class="form-control" name="username" placeholder="usuário" required autofocus>
     <label for="inputPassword" class="sr-only"></label>

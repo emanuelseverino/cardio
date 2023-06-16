@@ -1,4 +1,5 @@
 import calendar
+import os
 from datetime import datetime
 
 import pytz as pytz
@@ -11,6 +12,7 @@ from django.utils import timezone
 from django.views.generic import CreateView, DeleteView, ListView, DetailView, TemplateView
 from paciente.models import Paciente
 from paciente.views import Render
+from projeto.settings import BASE_DIR
 
 
 class ClinicaDetailView(DetailView):
@@ -50,7 +52,6 @@ class PacienteNovoView(CreateView):
         mes = timezone.now().month
         primeiro_dia = datetime(ano, mes, 1, tzinfo=pytz.timezone('America/Sao_Paulo'))
         ultimo_dia = datetime(ano, mes, calendar.monthrange(ano, mes)[1], tzinfo=pytz.timezone('America/Sao_Paulo'))
-        print(primeiro_dia, ultimo_dia)
         context["hoje"] = timezone.now()
         context["mes"] = timezone.now().month
         context["clinica"] = clinica
