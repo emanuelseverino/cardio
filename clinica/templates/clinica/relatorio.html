@@ -21,20 +21,19 @@
 
 <div class="container pt-5">
     <div class="card p-5">
-        <h1>Relatório</h1>
-        <p class="text-danger">Seja cauteloso, evite buscar por periodos longos.</p>
+        <h1>{{ clinica }}</h1>
+        <p class="">Seleciona as datas que deseja baixar o relatório. <br>Seja cauteloso, evite buscar por periodos longos.</p>
         <form method="post">
             {% csrf_token %}
-            {{ clinica_id }}
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <label for="inicial" class="form-label">Data incial</label>
-                    <input type="date" id="inicial" name="data_inicial" class="form-control" aria-label="Data inicial"
+                    <input autofocus type="date" id="inicial" name="data_inicial" class="form-control p-3" aria-label="Data inicial"
                            required>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <label for="final" class="form-label col-sm-12">Data final</label>
-                    <input type="date" id="final" name="data_final" class="form-control" aria-label="Data final"
+                    <input type="date" id="final" name="data_final" class="form-control p-3" aria-label="Data final"
                            required>
                 </div>
 
@@ -44,7 +43,7 @@
             {% endif %}
             <div class="d-grid  col-xs-12 col-sm-12 mx-auto">
                 <button type="submit"
-                        class="btn btn-primary btn-block mt-2">Baixar relatório
+                        class="btn btn-primary btn-block p-3 mt-3">Baixar relatório
                 </button>
             </div>
 

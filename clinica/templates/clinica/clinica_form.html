@@ -8,11 +8,13 @@
         {% for field in form %}
         <div class="">
             <label for="{{ field.label|lower }}" class="form-label">Nome</label>
-            <input type="text" class="form-control" required id="{{ field.label|lower }}"
+            <input autofocus type="text" class="form-control p-3" required id="{{ field.label|lower }}"
                    name="{{ field.label|lower }}" placeholder="ex: Clinica Central">
         </div>
         {% endfor %}
-        <button type="submit" class="btn btn-primary btn-block mt-2">Cadastrar</button>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-block mt-3 col-xs-12 col-sm-12 p-3">Cadastrar</button>
+        </div>
     </form>
 </div>
 {% endblock %}

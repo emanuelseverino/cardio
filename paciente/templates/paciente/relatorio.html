@@ -22,15 +22,26 @@ tr:nth-child(even) {
   background-color: red;
 }
 
+.display-6 {
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+
 
     </style>
 </head>
 <body>
 
-<h1>{{ clinica }}</h1>
+    <h3>{{ clinica }}</h3>
 
-<p>Lista de pacientes <strong>{{ inicial }}</strong> e <strong>{{ final }}</strong>.<br>Foram encontrados um total de
-    <strong>{{ pacientes|length }}</strong> no periodo.</p>
+<p>Lista de pacientes solicitados entre os dias <strong>{{ inicial }}</strong> e <strong>{{ final }}</strong>.<br>
+    Foram encontrados um total de <strong>{{ pacientes|length }}</strong> no periodo.</p>
+
+<hr>
+
+<h3>Lançamentos</h3>
 
 <table style="width:100%">
     <tr>

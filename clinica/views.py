@@ -89,16 +89,10 @@ class RelatorioView(View):
     form_class = RelatorioForm
     template_name = 'clinica/relatorio.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        clinica_id = Clinica.objects.get(id=self.kwargs['id'])
-        context["clinica_id"] = clinica_id
-        return context
-
     def get(self, request, id):
-        print(self.kwargs['id'])
+        clinica = Clinica.objects.get(pk=id)
         form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'clinica': clinica})
 
     def post(self, request, id):
         form = self.form_class(request.POST)
@@ -116,11 +110,9 @@ class RelatorioView(View):
                 pacientes = Paciente.objects.filter(clinica=clinica,
                                                     criado_em__range=(datainicial, datafinal)).order_by(
                     'criado_em')
-                print(datainicial)
-                print(datafinal)
                 if len(pacientes) == 0:
-                    raise Exception("Nenhum paciente encontrado entre %s - %s!" % (
-                    datainicial.date().strftime("%d/%m/%Y"), datafinal.date().strftime("%d/%m/%Y")))
+                    raise Exception("Nenhum paciente encontrado entre %s e %s. Pesquise outras datas." % (
+                        datainicial.date().strftime("%d/%m/%Y"), datafinal.date().strftime("%d/%m/%Y")))
                 nome_arquivo = '%s%s' % (clinica.nome.replace(' ', ''), datafinal.month)
                 params = {
                     'clinica': clinica,

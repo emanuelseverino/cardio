@@ -1,4 +1,5 @@
 {% load static %}
+{% load tz %}
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
@@ -21,9 +22,9 @@
 <body class="text-center">
 <form class="form-signin" method="post" action="{% url 'login' %}">
     {% csrf_token %}
-    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72"
-         height="72">
-    <h1 class="h4 mb-3 font-weight-normal">Por favor, identifique-se</h1>
+    <img class="" src="{% static 'img/logo.jpg' %}" alt="" width="120">
+    <p class="h4 font-weight-normal">Seja bem-vindo</p>
+    <p class="p  font-weight-normal">Por favor, se identifique</p>
     <label for="inputEmail" class="sr-only"></label>
     <input type="text" id="inputEmail" class="form-control" name="username" placeholder="usuário" required autofocus>
     <label for="inputPassword" class="sr-only"></label>
@@ -31,8 +32,10 @@
     {% if form.errors %}
     <div class="alert alert-danger" role="alert">Dados incorretos.</div>
     {% endif %}
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-    <p class="mt-5 mb-3 text-muted">© CardioUP | 2023</p>
+    <div class="d-grid">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+    </div>
+    <p class="mt-5 mb-3 text-muted">© CardioUP | 2020 - {% now "Y" %}</p>
 </form>
 
 
