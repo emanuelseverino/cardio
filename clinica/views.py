@@ -114,19 +114,22 @@ class RelatorioView(View):
                     raise Exception('Data invalida')
                 clinica = Clinica.objects.get(id=id)
                 pacientes = Paciente.objects.filter(clinica=clinica,
-                                                    criado_em__range=(datainicial, data_final)).order_by(
+                                                    criado_em__range=(datainicial, datafinal)).order_by(
                     'criado_em')
+                print(datainicial)
+                print(datafinal)
                 if len(pacientes) == 0:
-                    raise Exception("Nenhum paciente encontrado entre %s - %s!" % (datainicial.today().strftime("%d/%m/%Y"), data_final.today().strftime("%d/%m/%Y")))
+                    raise Exception("Nenhum paciente encontrado entre %s - %s!" % (
+                    datainicial.date().strftime("%d/%m/%Y"), datafinal.date().strftime("%d/%m/%Y")))
                 nome_arquivo = '%s%s' % (clinica.nome.replace(' ', ''), datafinal.month)
                 params = {
                     'clinica': clinica,
-                    'hoje': '123',
-                    'mes': '321',
+                    'inicial': datainicial.date().strftime("%d/%m/%Y"),
+                    'final': datafinal.date().strftime("%d/%m/%Y"),
                     'pacientes': pacientes,
                     'request': request,
                 }
                 return Render.render('paciente/relatorio.html', params, nome_arquivo)
         except Exception as e:
-            return render(request,  self.template_name, {'erro': str(e)})
+            return render(request, self.template_name, {'erro': str(e)})
         # return render(request, self.template_name, {'form': form})

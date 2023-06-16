@@ -22,15 +22,15 @@ tr:nth-child(even) {
   background-color: red;
 }
 
+
     </style>
 </head>
 <body>
 
 <h1>{{ clinica }}</h1>
 
-<p>Até a data de {{ hoje }}, foram realizados um total de {{ pacientes|length }} exames no mês.</p>
-
-<hr>
+<p>Lista de pacientes <strong>{{ inicial }}</strong> e <strong>{{ final }}</strong>.<br>Foram encontrados um total de
+    <strong>{{ pacientes|length }}</strong> no periodo.</p>
 
 <table style="width:100%">
     <tr>
@@ -42,7 +42,7 @@ tr:nth-child(even) {
     <tr>
         <td>{{ forloop.counter0|add:1 }}</td>
         <td>{{ paciente.nome }}</td>
-        <td>{{ paciente.criado_em }}</td>
+        <td>{{ paciente.criado_em|date }}</td>
     </tr>
     {% endfor %}
 </table>
