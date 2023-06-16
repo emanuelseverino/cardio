@@ -22,7 +22,7 @@
             <tr>
                 <td class=""><a class="nav-link active" href="{% url 'clinica_detail' clinica.id %}">{{ clinica.nome }}</a></td>
                 <td>
-                    <a href="{% url 'relatorio_pdf' clinica.id %}" class="btn btn-sm btn-outline-success" type="button">Relatório</a>
+                    <a href="{% url 'relatorio_clinica' clinica.id %}" class="btn btn-sm btn-outline-success" type="button">Relatório</a>
                 </td>
             </tr>
             {% endfor %}
