@@ -3,10 +3,8 @@
 ![logo-q.png](static%2Fimg%2Flogo-q.png)
 
 <h1>Setup</h1>
-<hr>
 
-<h2>DJANGO 4.2.2</h2>
-python -3.11.1
+<h2>DJANGO 4.2.2 & python -3.11.1</h2>
 
 Projeto criado para médicos cardiologista na cidade de Belo Horizonte.
 
@@ -16,5 +14,5 @@ Fazer relatórios filtrados por um determinado periodo e saber quando exames for
 
 Aqui está o projeto FULL, sem a necessidade de esconder os dados sensiveis, pois o que foi para o ar já está lapdado.
 
-Contato
+Contato<br/>
 https://wa.me/5522997990159
