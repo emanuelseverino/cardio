@@ -44,8 +44,6 @@ class Render:
 class PDF(View):
 
     def get(self, request, id):
-        print('args: %s' % self.args)
-        print('args: %s' % self.kwargs)
         clinica = Clinica.objects.get(id=id)
         hoje = timezone.now().date()
         ano = timezone.now().year
