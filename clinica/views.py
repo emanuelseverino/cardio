@@ -43,7 +43,7 @@ class ClinicaDeleteView(DeleteView):
 class PacienteNovoView(CreateView):
     model = Paciente
     form_class = PacienteForm
-    template_name = 'clinica/paciente_novo.html'
+    template_name = 'clinica/clinica_paciente_novo.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
